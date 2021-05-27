@@ -85,4 +85,12 @@ main section.products-show {
   }
 }
 
-
+main section.orders-show {
+  .email {
+    float: right;
+    font-size: 1.2em
+  }
+  p {
+    font-size: 1em;
+  }
+}

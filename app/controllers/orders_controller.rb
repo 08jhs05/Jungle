@@ -2,6 +2,13 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @line_itmes = LineItem.where(:order_id => params[:id]).all      # finds all line items with current order id
+    @line_itmes_with_products_info = []
+
+    @line_itmes.each do |line_item|
+      merge = [line_item, Product.find(line_item.product_id)]
+      @line_itmes_with_products_info.push(merge)    # finds product information of line items and push it into array
+    end
   end
 
   def create
