@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
 
   before do
-    @user = User.new(:first_name => "first", :last_name => "last", :email => "a@a.com", :password => "111", :password_confirmation => "111")
+    @user = User.new(:first_name => "first", :last_name => "last", :email => "a@a.com", :password => "1234567", :password_confirmation => "1234567")
   end
 
-  describe 'Validations' 
+  describe 'Validations' do
 
     it "should successfully saves a user given a first name, last name, email, password and password confirmation" do
       @user.save
@@ -37,7 +37,7 @@ RSpec.describe User, type: :model do
       end
 
       it "should fail to create a user when email already exists" do
-        user2 = User.new(:first_name => "first2", :last_name => "last2", :email => "b@b.com", :password => "222", :password_confirmation => "222")
+        user2 = User.new(:first_name => "first2", :last_name => "last2", :email => "a@a.com", :password => "222", :password_confirmation => "222")
         @user.save
         user2.save
         expect(user2).to_not be_valid
@@ -78,19 +78,19 @@ RSpec.describe User, type: :model do
     describe '.authenticate_with_credentials' do
       it "should return an instance of the user if successfully authenticated" do
         @user.save
-        authenticated_user = User.authenticate_with_credentials('a@a.com', '111')
+        authenticated_user = User.authenticate_with_credentials('a@a.com', '1234567')
         expect(authenticated_user.email).to eq @user.email
       end
 
       it "should return an instance of the user regardless of email case" do
         @user.save
-        authenticated_user = User.authenticate_with_credentials('A@a.com', '111')
+        authenticated_user = User.authenticate_with_credentials('A@a.com', '1234567')
         expect(authenticated_user.email).to eq @user.email
       end
 
       it "should return an instance of the user regardless of trailing spaces before and/or after email" do
         @user.save
-        authenticated_user = User.authenticate_with_credentials('  a@a.com  ', '1')
+        authenticated_user = User.authenticate_with_credentials('  a@a.com  ', '1234567')
         expect(authenticated_user.email).to eq @user.email
       end
 
