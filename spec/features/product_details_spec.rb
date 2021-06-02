@@ -21,5 +21,7 @@ RSpec.feature "Visitor navigates from home page to a product details page by cli
 
     expect(page).to have_css 'article.product-detail', count: 1
     expect(page).to have_content("10")
+
+    save_screenshot
   end
 end
